@@ -6,10 +6,10 @@ class CustomersController < ApplicationController
     end
 
     def show 
-        delivery = Delivery.find(params[:id])
-        render json: delivery
+        customer = Customer.find(params[:id])
+        render json: customer
     rescue ActiveRecord::RecordNotFound
-        render json: "Delivery not found", status: 404
+        render json: "Customer not found", status: 404
     end
 
 end
