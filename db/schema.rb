@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_005015) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_22_000956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,4 +26,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_005015) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "driver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_deliveries_on_customer_id"
+    t.index ["driver_id"], name: "index_deliveries_on_driver_id"
+    t.index ["user_id"], name: "index_deliveries_on_user_id"
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "name"
+    t.string "nickname"
+    t.integer "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.string "store_name"
+    t.string "address"
+    t.string "city"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "deliveries", "customers"
+  add_foreign_key "deliveries", "drivers"
+  add_foreign_key "deliveries", "users"
 end
