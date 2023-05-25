@@ -1,13 +1,20 @@
+import React, { useContext } from "react";
+import { UserContext } from "./context/user";
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // const { loading } = useContext(UserContext);
+  
+
+  if(loading) return <h1>Loading</h1>
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit and save to reload.
         </p>
         <a
           className="App-link"
